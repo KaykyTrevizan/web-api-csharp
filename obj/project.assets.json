@@ -6694,11 +6694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_Projetos_Faculdade\\C#\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\_Projetos_Faculdade\\DevSwVisual\\C#\\WebApi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "C:\\_Projetos_Faculdade\\C#\\WebApi\\WebApi.csproj",
+      "projectPath": "C:\\_Projetos_Faculdade\\DevSwVisual\\C#\\WebApi\\WebApi.csproj",
       "packagesPath": "C:\\Users\\kayky\\.nuget\\packages\\",
-      "outputPath": "C:\\_Projetos_Faculdade\\C#\\WebApi\\obj\\",
+      "outputPath": "C:\\_Projetos_Faculdade\\DevSwVisual\\C#\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kayky\\AppData\\Roaming\\NuGet\\NuGet.Config",

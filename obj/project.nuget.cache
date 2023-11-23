@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/ZDsjVEtlngEFJpyGz8hUQw9JnI4FuHi4IjmEpjEDo7/KHoi+ycyv6tQMvbX1HmHcFZWb43GSgsjeEEiSFZ74A==",
+  "dgSpecHash": "GfbqD2OeJd5b95B3pRt7CFzpV2tmpmvYnolAydI8xUPvO2+KYEKUv2gIBLrDtcUfBDauXu+M+dc6UO8/5eW8+g==",
   "success": true,
-  "projectFilePath": "C:\\_Projetos_Faculdade\\C#\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\_Projetos_Faculdade\\DevSwVisual\\C#\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kayky\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\kayky\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

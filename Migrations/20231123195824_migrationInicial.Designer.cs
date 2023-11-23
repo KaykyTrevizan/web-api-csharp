@@ -10,7 +10,7 @@ using WebApiFilmesSeries.Data;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231006175754_migrationInicial")]
+    [Migration("20231123195824_migrationInicial")]
     partial class migrationInicial
     {
         /// <inheritdoc />

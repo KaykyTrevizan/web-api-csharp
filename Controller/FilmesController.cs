@@ -15,7 +15,6 @@ namespace WebApiFilmesSeries.Controllers
     public class FilmesController : ControllerBase
     {
         private readonly AppDbContext _context;
-
         //metodo para se comunicar com dbContext
         public FilmesController(AppDbContext context)
         {
@@ -44,7 +43,6 @@ namespace WebApiFilmesSeries.Controllers
         {
             _context.Filmes.Add(filme);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetFilme", new { id = filme.Id }, filme);
         }
 
@@ -53,9 +51,7 @@ namespace WebApiFilmesSeries.Controllers
         public async Task<IActionResult> PutFilme(int id, Filme filme)
         {
             if (id != filme.Id) return BadRequest();
-
             _context.Entry(filme).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -67,57 +63,15 @@ namespace WebApiFilmesSeries.Controllers
             }
             return NoContent();
         }
-        //atualizar parcialmente o filme
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchFilme(int idFilme, [FromBody] Filme filmeAtualizado)
-        {
-            try
-            {
-                var filmeExistente = await _context.Filmes.FindAsync(idFilme);
-
-                if (filmeExistente == null)
-                    return NotFound();
-
-                // Atualize apenas as propriedades que foram fornecidas no filmeAtualizado
-                if (filmeAtualizado.Nome != null)
-                    filmeExistente.Nome = filmeAtualizado.Nome;
-
-                if (filmeAtualizado.Ano != 0)
-                    filmeExistente.Ano = filmeAtualizado.Ano;
-
-                if (filmeAtualizado.Diretor != null)
-                    filmeExistente.Diretor = filmeAtualizado.Diretor;
-
-                if (filmeAtualizado.Duracao != 0)
-                    filmeExistente.Duracao = filmeAtualizado.Duracao;
-
-                if (filmeAtualizado.Genero != null)
-                    filmeExistente.Genero = filmeAtualizado.Genero;
-
-                if (filmeAtualizado.Estudio != null)
-                    filmeExistente.Estudio = filmeAtualizado.Estudio;
-
-                await _context.SaveChangesAsync();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            { 
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
-        }
     
         //apagar filme
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFilme(int id)
         {
             var filme = await _context.Filmes.FindAsync(id);
-
             if (filme == null) return NotFound();
-
             _context.Filmes.Remove(filme);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
         //metodo para verifcar filme existente (usado para atualizar)

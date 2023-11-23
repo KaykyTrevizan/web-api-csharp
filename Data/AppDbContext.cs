@@ -17,10 +17,6 @@ namespace WebApiFilmesSeries.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Configurações adicionais podem ser feitas aqui, como chaves, índices, etc.
         }
     }
 }
-
-

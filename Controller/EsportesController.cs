@@ -32,12 +32,7 @@ namespace WebApiFilmesSeries.Controllers
         public async Task<ActionResult<Esportes>> GetEsporte(int id)
         {
             var esporte = await _context.Esportes.FindAsync(id);
-
-            if (esporte == null)
-            {
-                return NotFound();
-            }
-
+            if (esporte == null) return NotFound();
             return esporte;
         }
 
@@ -47,7 +42,6 @@ namespace WebApiFilmesSeries.Controllers
         {
             _context.Esportes.Add(esporte);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetEsporte", new { id = esporte.Id }, esporte);
         }
 
@@ -55,74 +49,27 @@ namespace WebApiFilmesSeries.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEsporte(int id, [FromBody] Esportes esporte)
         {
-            if (id != esporte.Id)
-            {
-                return BadRequest();
-            }
-
+            if (id != esporte.Id) return BadRequest();
             _context.Entry(esporte).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EsporteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!EsporteExists(id)) return NotFound();
+                else throw;
             }
-
             return NoContent();
         }
-
-        // Patch an existing esporte
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchEsporte(int idEsporte, [FromBody] Esportes esporteAtualizado)
-        {
-            try
-            {
-                var esporteExistente = await _context.Esportes.FindAsync(idEsporte);
-
-                if (esporteExistente == null)
-                    return NotFound();
-
-                // Atualize apenas as propriedades que foram fornecidas no esporteAtualizado
-                if (esporteAtualizado.NomeEsporte != null)
-                    esporteExistente.NomeEsporte = esporteAtualizado.NomeEsporte;
-
-                if (esporteAtualizado.Campeonato != null)
-                    esporteExistente.Campeonato = esporteAtualizado.Campeonato;
-
-                await _context.SaveChangesAsync();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
-        }
-
-        // Delete an existing esporte
+        // Apagar um esporte
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEsporte(int id)
         {
             var esporte = await _context.Esportes.FindAsync(id);
-
-            if (esporte == null)
-            {
-                return NotFound();
-            }
-
+            if (esporte == null) return NotFound();
             _context.Esportes.Remove(esporte);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 

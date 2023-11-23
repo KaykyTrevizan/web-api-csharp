@@ -15,7 +15,6 @@ namespace WebApiFilmesSeries.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
-
         public UsuariosController(AppDbContext context)
         {
             _context = context;
@@ -31,12 +30,7 @@ namespace WebApiFilmesSeries.Controllers
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
-
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
+            if (usuario == null) return NotFound();
             return usuario;
         }
 
@@ -45,76 +39,33 @@ namespace WebApiFilmesSeries.Controllers
         {
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetUsuario", new { id = usuario.Id}, usuario);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != usuario.Id)
-                return BadRequest();
-
+            if (id != usuario.Id) return BadRequest();
             _context.Entry(usuario).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
-                    return NotFound();
-                else
-                    throw;
+                if (!UsuarioExists(id)) return NotFound();
+                else throw;
             }
-
             return NoContent();
         }
-        [HttpPatch("{id}")]
-        public async Task<ActionResult> PatchUsuario(int idUsuario, [FromBody] Usuario usuarioAtualizado)
-        {
-            try
-            {
-                var usuarioExistente = await _context.Usuarios.FindAsync(idUsuario);
-
-                if (usuarioExistente == null)
-                    return NotFound();
-
-                // Atualize apenas as propriedades que foram fornecidas no usuarioAtualizado
-                if (usuarioAtualizado.Nome != null)
-                    usuarioExistente.Nome = usuarioAtualizado.Nome;
-
-                if (usuarioAtualizado.Email != null)
-                    usuarioExistente.Email = usuarioAtualizado.Email;
-
-                if (usuarioAtualizado.Idade != 0)
-                    usuarioExistente.Idade = usuarioAtualizado.Idade;
-
-                await _context.SaveChangesAsync();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
-        }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuario(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
-
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
+            if (usuario == null) return NotFound();
             _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
